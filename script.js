@@ -337,9 +337,12 @@ function renderCategoryNav(categoryList) {
     button.addEventListener('click', () => {
       const target = document.getElementById(category.slug);
       if (target) {
-        const headerHeight = document.querySelector('.navbar')?.offsetHeight || 88;
-        const categoryHeight = document.querySelector('.categories-wrapper')?.offsetHeight || 90;
-        const offset = headerHeight + categoryHeight + 20;
+        // account for fixed sticky bar height
+        const stickyBar = document.getElementById('stickyBar');
+        const stickyHeight = stickyBar ? stickyBar.getBoundingClientRect().height : 0;
+        const navHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+        // final offset should be stickyHeight + navHeight
+        const offset = Math.ceil(stickyHeight + navHeight + 8);
         const targetTop = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top: targetTop, behavior: 'smooth' });
         document.body.classList.add('scrolled');
@@ -470,6 +473,9 @@ function buildWhatsAppMessage() {
 
 function filterMenu() {
   const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  // collapse hero when searching, expand when cleared
+  document.body.classList.toggle('search-active', !!query);
+
   if (!query) {
     renderMenu(categories);
     return;
@@ -509,7 +515,88 @@ function handleScrollEffects() {
 
 function initializeApp() {
   renderMenu(categories);
-  document.getElementById('searchInput').addEventListener('input', filterMenu);
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', filterMenu);
+
+  // compute and set sticky top based on current navbar height
+  const nav = document.querySelector('.custom-navbar') || document.querySelector('.navbar');
+  let navHeight = nav ? nav.offsetHeight : 88;
+  const collapsedTop = 12; // px when navbar is collapsed during search
+
+  function setStickyTop(px) {
+    document.documentElement.style.setProperty('--sticky-top', px + 'px');
+  }
+
+  // initial set
+  setStickyTop(navHeight);
+
+  // set placeholder height so page content doesn't jump when sticky-bar is fixed
+  const placeholder = document.getElementById('stickyPlaceholder');
+  function updatePlaceholder() {
+    const stickyBar = document.getElementById('stickyBar');
+    if (!stickyBar || !placeholder) return;
+    const rect = stickyBar.getBoundingClientRect();
+    // compute full height needed
+    const h = Math.ceil(rect.height + 4);
+    placeholder.style.height = h + 'px';
+    document.documentElement.style.setProperty('--sticky-placeholder-height', h + 'px');
+    // also expose sticky bar height so other elements (hero) can account for it
+    document.documentElement.style.setProperty('--sticky-bar-height', h + 'px');
+    // add helper body class so we can adjust hero padding
+    document.body.classList.add('has-fixed-sticky');
+  }
+  updatePlaceholder();
+  // keep updated on resize and when search toggles
+  window.addEventListener('resize', updatePlaceholder);
+
+  // update on resize (unless search active)
+  window.addEventListener('resize', () => {
+    navHeight = nav ? nav.offsetHeight : 88;
+    if (!document.body.classList.contains('search-active')) {
+      setStickyTop(navHeight);
+    }
+  });
+
+  // keep behavior: collapse hero immediately when user types
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim();
+    document.body.classList.toggle('search-active', !!q);
+    // update sticky top so sticky-bar sits below collapsed navbar (or normal navbar)
+    setStickyTop(q ? collapsedTop : navHeight);
+    // update placeholder in case collapsed styles change height
+    setTimeout(updatePlaceholder, 120);
+    // when search becomes active on small screens, ensure navbar collapses and categories are scrollable
+    const catNav = document.getElementById('categoryNav');
+    if (catNav) {
+      // force horizontal scroll enabled
+      catNav.style.overflowX = q ? 'auto' : '';
+      // if active, show the left-most categories (user can scroll right)
+      if (q) {
+        // small delay to allow styles to apply
+        setTimeout(() => {
+          // keep it at start so user can swipe to right; if you prefer auto-scroll to right uncomment the next line
+          // catNav.scrollLeft = catNav.scrollWidth;
+        }, 80);
+      }
+    }
+  });
+
+  // when input is focused we also mark search-active for immediate collapse on mobile
+  searchInput.addEventListener('focus', () => {
+    const q = searchInput.value.trim();
+    if (q) {
+      document.body.classList.add('search-active');
+      setStickyTop(collapsedTop);
+    }
+  });
+  searchInput.addEventListener('blur', () => {
+    const q = searchInput.value.trim();
+    if (!q) {
+      document.body.classList.remove('search-active');
+      setStickyTop(navHeight);
+      setTimeout(updatePlaceholder, 120);
+    }
+  });
 
   document.getElementById('viewCartBtn').addEventListener('click', () => {
     updateTotal();

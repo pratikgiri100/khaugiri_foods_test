@@ -51,6 +51,11 @@ body {
   padding-bottom: 2.25rem;
   transition: padding 0.35s ease, transform 0.35s ease;
 }
+
+/* When the sticky bar is fixed, push the hero down so it isn't overlapped */
+body.has-fixed-sticky .hero-section {
+  padding-top: calc(4rem + var(--sticky-bar-height, 0px));
+}
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -81,6 +86,85 @@ body.scrolled .hero-section .display-5 {
 }
 body.scrolled .hero-section .lead {
   opacity: 0.92;
+}
+
+/* Collapse hero when user is actively searching */
+body.search-active .hero-section {
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  min-height: 48px;
+  overflow: hidden;
+}
+body.search-active .hero-section .hero-content {
+  opacity: 0;
+  transform: translateY(-8px);
+  height: 0;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+body.search-active .hero-section .hero-overlay {
+  opacity: 0.08;
+}
+
+/* Ensure category row remains single-line horizontal on small widths */
+.category-nav {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  align-items: center;
+}
+.category-nav .category-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* When user is searching on mobile, hide the full header/navbar and make categories non-sticky */
+@media (max-width: 992px) {
+  body.search-active .custom-navbar {
+    transform: translateY(-130%);
+    transition: transform 0.28s ease;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* keep categories sticky even when header is collapsed during search */
+  body.search-active .categories-wrapper {
+    position: sticky;
+    top: 68px; /* sits below the collapsed navbar */
+    z-index: 1050;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+    backdrop-filter: blur(8px);
+    background: rgba(247, 250, 252, 0.95);
+    transition: top 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  /* tighter offset on narrow screens */
+  @media (max-width: 576px) {
+    body.search-active .categories-wrapper {
+      top: 56px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    body.search-active .categories-wrapper {
+      top: 50px;
+    }
+  }
+
+  /* make scrollbar visible while searching so user notices horizontal scroll */
+  body.search-active .category-nav {
+    overflow-x: auto;
+  }
+
+  body.search-active .category-nav::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  body.search-active .category-nav::-webkit-scrollbar-thumb {
+    background: rgba(15,23,42,0.12);
+    border-radius: 999px;
+  }
 }
 .eyebrow {
   text-transform: uppercase;
@@ -152,6 +236,25 @@ body.scrolled .hero-section .lead {
   border-radius: 999px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
 }
+
+/* Combined sticky container for search + categories */
+.sticky-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--sticky-top, 88px);
+  z-index: 1050;
+  background: rgba(247, 250, 252, 0.0);
+  padding-top: 6px;
+}
+
+/* When search is active, the navbar collapses — bring sticky-bar closer to top */
+/* When search is active we set --sticky-top from JS; provide a fallback */
+body.search-active .sticky-bar {
+  background: rgba(247, 250, 252, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+}
 .menu-section {
   margin-bottom: 3rem;
   scroll-margin-top: 240px;
@@ -164,17 +267,18 @@ body.scrolled .hero-section .lead {
   scroll-margin-top: 260px;
 }
 .categories-wrapper {
-  position: sticky;
-  top: 88px;
-  z-index: 25;
   background: rgba(247, 250, 252, 0.95);
-  margin-top: -1.8rem;
+  margin-top: 0;
   padding: 0.75rem 0.5rem 1rem;
   backdrop-filter: blur(12px);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
   border-bottom: 1px solid rgba(15, 23, 42, 0.06);
   overflow: hidden;
-  transition: top 0.35s ease, padding 0.35s ease, box-shadow 0.35s ease, height 0.35s ease;
+  transition: padding 0.35s ease, box-shadow 0.35s ease, height 0.35s ease;
+}
+
+#stickyPlaceholder {
+  height: var(--sticky-placeholder-height, 0px);
 }
 body.scrolled .categories-wrapper {
   top: 78px;
@@ -354,6 +458,9 @@ body.scrolled .categories-wrapper::after {
     padding-top: 3rem;
     padding-bottom: 1.5rem;
   }
+  body.has-fixed-sticky .hero-section {
+    padding-top: calc(3rem + var(--sticky-bar-height, 0px));
+  }
   .hero-section .display-5 {
     font-size: 2.2rem;
   }
@@ -408,6 +515,9 @@ body.scrolled .categories-wrapper::after {
     padding-top: 2.5rem;
     padding-bottom: 1.2rem;
   }
+  body.has-fixed-sticky .hero-section {
+    padding-top: calc(2.5rem + var(--sticky-bar-height, 0px));
+  }
   .hero-section .display-5 {
     font-size: 1.8rem;
   }
@@ -421,8 +531,10 @@ body.scrolled .categories-wrapper::after {
     text-align: center;
   }
   .category-nav {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .category-pill {
     font-size: 0.85rem;

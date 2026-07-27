@@ -28,7 +28,7 @@
       <div class="row align-items-center">
         <div class="col-lg-7 text-white">
           <p class="eyebrow">खाऊगिरी फूड्समध्ये आपले हार्दिक स्वागत!</p>
-          <h1 class="display-5 fw-bold mb-3">ताजे, स्वादिष्ट आणि शुद्ध शाकाहारी पदार्थ आता खाली दिलेल्या कॅटेगरी नुसार सहज ऑर्डर करा.</h1>
+          <h1 class="display-5 fw-bold mb-3">ताजे, स्वादिष्ट आणि शुद्ध शाकाहारी पदार्थ आता वर दिलेल्या कॅटेगरी नुसार सहज ऑर्डर करा.</h1>
           <p class="lead mb-4">पिझ्झा, रोल्स, सँडविच, नूडल्स, चाट, डेझर्ट्स आणि 150+ चविष्ट पदार्थांच्या मेनूमधून आपल्या आवडीचे पदार्थ निवडा.  ₹100 किंवा त्या पेक्षा जास्त ऑर्डरवर मोफत होम डिलिव्हरी!</p>
           <div class="d-flex flex-wrap gap-2">
             <a href="#menuContainer" class="btn btn-primary btn-lg">Explore Menu</a>
@@ -42,14 +42,21 @@
     </div>
   </header>
 
-  <section class="container categories-wrapper py-4">
-    <div class="d-flex flex-wrap gap-2 category-nav" id="categoryNav"></div>
+  <section class="container py-0">
+    <div class="sticky-bar" id="stickyBar">
+      <div class="search-row mb-3">
+        <label id="searchLabel" class="visually-hidden">Search menu</label>
+        <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search menu items, categories, prices..." />
+      </div>
+
+      <div class="categories-wrapper py-2">
+        <div class="d-flex gap-2 category-nav" id="categoryNav" role="tablist" aria-label="Menu categories"></div>
+      </div>
+    </div>
   </section>
+  <div id="stickyPlaceholder" aria-hidden="true"></div>
 
   <section class="container py-3">
-    <div class="search-row mb-4">
-      <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search menu items, categories, prices..." />
-    </div>
     <div id="menuContainer"></div>
   </section>
 
