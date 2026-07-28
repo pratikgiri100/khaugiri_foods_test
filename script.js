@@ -1,35 +1,5 @@
 const categories = [
   {
-    id: "आईस्क्रीम कुल्फी",
-    name: "आईस्क्रीम कुल्फी",
-    items: [
-      { name: "कुल्फी", price: 12, image: "menu card image/Kulfi.png" },
-      { name: "जीरा सोडा", price: 15, image: "menu card image/Jeera_Soda.png" },
-      { name: "बटरस्कॉच", price: 30, image: "menu card image/butter ice.jpg" },
-      { name: "चॉकलेट", price: 30, image: "menu card image/chocolate ice.webp" },
-      { name: "व्हॅनिला", price: 30, image: "menu card image/vanilla ice.jpg" }
-    ]
-  },
-  {
-    id: "शेक",
-    name: "शेक",
-    items: [
-      { name: "केसर-पिस्ता शेक", price: 65, image: "menu card image/kesar pista shake.webp" },
-      { name: "पायनॅपल शेक", price: 65, image: "menu card image/pineapple shake.jpg" },
-      { name: "कोल्ड कॉफी", price: 45, image: "menu card image/cold coffee.jpeg" },
-      { name: "कोल्ड कॉफी आईस्क्रीम", price: 65, image: "menu card image/cold coffee ice.jpeg" },
-      { name: "कोल्ड कॉफी चोको क्रॅश", price: 65, image: "menu card image/cold coffee choco.jpeg" },
-      { name: "कोल्ड कॉफी आईस्क्रीम + क्रॅश", price: 75, image: "menu card image/cold coffee ice choco.jpeg" },
-      { name: "चॉकलेट शेक", price: 65, image: "menu card image/choco shake.jpeg" },
-      { name: "चॉकलेट शेक चोको क्रॅश", price: 85, image: "menu card image/choco shake.jpeg" },
-      { name: "व्हॅनिला शेक", price: 65, image: "menu card image/vaniila shake.jpg" },
-      { name: "ओरियो फ्रिक शेक", price: 85, image: "menu card image/freak shake.jpg" },
-      { name: "ओरियो फ्रिक शेक आईस्क्रीम", price: 105, image: "menu card image/oreo freak shake.jpg" },
-      { name: "ओरियो फ्रिक शेक चोको क्रॅश", price: 105, image: "menu card image/oreo freak shake.jpg" },
-      { name: "ओरियो फ्रिक शेक KGF SPECIAL", price: 125, image: "menu card image/kgf special.jpeg" }
-    ]
-  },
-  {
     id: "फ्रोझन प्रॉडक्ट्स",
     name: "फ्रोझन प्रॉडक्ट्स",
     items: [
@@ -278,6 +248,36 @@ const categories = [
     ]
   },
   {
+    id: "आईस्क्रीम कुल्फी",
+    name: "आईस्क्रीम कुल्फी",
+    items: [
+      { name: "कुल्फी", price: 12, image: "menu card image/Kulfi.png" },
+      { name: "जीरा सोडा", price: 15, image: "menu card image/Jeera_Soda.png" },
+      { name: "बटरस्कॉच", price: 30, image: "menu card image/butter ice.jpg" },
+      { name: "चॉकलेट", price: 30, image: "menu card image/chocolate ice.webp" },
+      { name: "व्हॅनिला", price: 30, image: "menu card image/vanilla ice.jpg" }
+    ]
+  },
+  {
+    id: "शेक",
+    name: "शेक",
+    items: [
+      { name: "केसर-पिस्ता शेक", price: 65, image: "menu card image/kesar pista shake.webp" },
+      { name: "पायनॅपल शेक", price: 65, image: "menu card image/pineapple shake.jpg" },
+      { name: "कोल्ड कॉफी", price: 45, image: "menu card image/cold coffee.jpeg" },
+      { name: "कोल्ड कॉफी आईस्क्रीम", price: 65, image: "menu card image/cold coffee ice.jpeg" },
+      { name: "कोल्ड कॉफी चोको क्रॅश", price: 65, image: "menu card image/cold coffee choco.jpeg" },
+      { name: "कोल्ड कॉफी आईस्क्रीम + क्रॅश", price: 75, image: "menu card image/cold coffee ice choco.jpeg" },
+      { name: "चॉकलेट शेक", price: 65, image: "menu card image/choco shake.jpeg" },
+      { name: "चॉकलेट शेक चोको क्रॅश", price: 85, image: "menu card image/choco shake.jpeg" },
+      { name: "व्हॅनिला शेक", price: 65, image: "menu card image/vaniila shake.jpg" },
+      { name: "ओरियो फ्रिक शेक", price: 85, image: "menu card image/freak shake.jpg" },
+      { name: "ओरियो फ्रिक शेक आईस्क्रीम", price: 105, image: "menu card image/oreo freak shake.jpg" },
+      { name: "ओरियो फ्रिक शेक चोको क्रॅश", price: 105, image: "menu card image/oreo freak shake.jpg" },
+      { name: "ओरियो फ्रिक शेक KGF SPECIAL", price: 125, image: "menu card image/kgf special.jpeg" }
+    ]
+  },
+  {
     id: "इतर",
     name: "इतर",
     items: [
@@ -523,26 +523,35 @@ function initializeApp() {
   let navHeight = nav ? nav.offsetHeight : 88;
   const collapsedTop = 12; // px when navbar is collapsed during search
 
-  function setStickyTop(px) {
-    document.documentElement.style.setProperty('--sticky-top', px + 'px');
+  function setNavbarHeight(px) {
+    document.documentElement.style.setProperty('--navbar_height', px + 'px');
+    document.documentElement.style.setProperty('--navbar-height', px + 'px');
+    const offerCarousel = document.getElementById('offerCarousel');
+    const carouselHeight = offerCarousel ? offerCarousel.offsetHeight : 0;
+    document.documentElement.style.setProperty('--carousel-height', carouselHeight + 'px');
+  }
+
+  function refreshCarouselHeight() {
+    const offerCarousel = document.getElementById('offerCarousel');
+    const carouselHeight = offerCarousel ? offerCarousel.offsetHeight : 0;
+    document.documentElement.style.setProperty('--carousel-height', carouselHeight + 'px');
+    return carouselHeight;
   }
 
   // initial set
-  setStickyTop(navHeight);
+  setNavbarHeight(navHeight);
 
   // set placeholder height so page content doesn't jump when sticky-bar is fixed
   const placeholder = document.getElementById('stickyPlaceholder');
   function updatePlaceholder() {
     const stickyBar = document.getElementById('stickyBar');
     if (!stickyBar || !placeholder) return;
+
     const rect = stickyBar.getBoundingClientRect();
-    // compute full height needed
     const h = Math.ceil(rect.height + 4);
     placeholder.style.height = h + 'px';
     document.documentElement.style.setProperty('--sticky-placeholder-height', h + 'px');
-    // also expose sticky bar height so other elements (hero) can account for it
     document.documentElement.style.setProperty('--sticky-bar-height', h + 'px');
-    // add helper body class so we can adjust hero padding
     document.body.classList.add('has-fixed-sticky');
   }
   updatePlaceholder();
@@ -553,8 +562,12 @@ function initializeApp() {
   window.addEventListener('resize', () => {
     navHeight = nav ? nav.offsetHeight : 88;
     if (!document.body.classList.contains('search-active')) {
-      setStickyTop(navHeight);
+      setNavbarHeight(navHeight);
     }
+    setTimeout(() => {
+      refreshCarouselHeight();
+      updatePlaceholder();
+    }, 120);
   });
 
   // keep behavior: collapse hero immediately when user types
@@ -562,9 +575,12 @@ function initializeApp() {
     const q = searchInput.value.trim();
     document.body.classList.toggle('search-active', !!q);
     // update sticky top so sticky-bar sits below collapsed navbar (or normal navbar)
-    setStickyTop(q ? collapsedTop : navHeight);
+    setNavbarHeight(q ? collapsedTop : navHeight);
     // update placeholder in case collapsed styles change height
-    setTimeout(updatePlaceholder, 120);
+    setTimeout(() => {
+      refreshCarouselHeight();
+      updatePlaceholder();
+    }, 120);
     // when search becomes active on small screens, ensure navbar collapses and categories are scrollable
     const catNav = document.getElementById('categoryNav');
     if (catNav) {
@@ -586,15 +602,18 @@ function initializeApp() {
     const q = searchInput.value.trim();
     if (q) {
       document.body.classList.add('search-active');
-      setStickyTop(collapsedTop);
+      setNavbarHeight(collapsedTop);
     }
   });
   searchInput.addEventListener('blur', () => {
     const q = searchInput.value.trim();
     if (!q) {
       document.body.classList.remove('search-active');
-      setStickyTop(navHeight);
-      setTimeout(updatePlaceholder, 120);
+      setNavbarHeight(navHeight);
+      setTimeout(() => {
+        refreshCarouselHeight();
+        updatePlaceholder();
+      }, 120);
     }
   });
 

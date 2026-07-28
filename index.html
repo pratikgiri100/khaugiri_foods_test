@@ -8,19 +8,55 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="site-body">
-  <nav class="navbar navbar-expand-lg fixed-top custom-navbar px-3 py-3">
-    <div class="d-flex align-items-center gap-3">
-      <img src="KGF_Logo.png" alt="Khaugiri Logo" class="logo-img" />
-      <div>
-        <div class="restaurant-name">KhauGiri Foods (KGF)</div>
-        <div class="restaurant-tagline">Pure Veg | Fast Delivery | Fresh & Tasty</div>
-        <div class="restaurant-contact">📞 9403201043, 7028493881</div>
+  <nav class="navbar navbar-expand-lg px-3 py-2 fixed-top custom-navbar">
+    <div class="d-flex align-items-center">
+      <!-- Logo -->
+      <img src="KGF_Logo.png" alt="Khaugiri Logo" class="logo-img me-3">
+
+      <!-- Text Section -->
+      <div class="d-flex flex-column">
+        <span class="restaurant-name">KhauGiri Foods (KGF)</span>
+        <span class="restaurant-tagline">Pure Veg &amp; Fast Food Restaurant</span>
+        <span class="restaurant-contact">
+          📞 9403201043, 7028493881
+        </span>
       </div>
     </div>
+
+    <!-- Order Button -->
     <button class="btn order-btn ms-auto" id="viewCartBtn">
-      <span class="order-icon">🍴</span> View Cart
+      <span style="filter: grayscale(100%) brightness(0);">🍴</span> View &amp; Place Order
     </button>
   </nav>
+
+  <section class="container py-0">
+    <div class="sticky-bar" id="stickyBar">
+      <div class="search-row mb-3">
+        <label id="searchLabel" class="visually-hidden">Search menu items, categories, prices...</label>
+        <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search menu items, categories, prices..." />
+      </div>
+
+      <div class="categories-wrapper py-2">
+        <div class="d-flex gap-2 category-nav" id="categoryNav" role="tablist" aria-label="Menu categories"></div>
+      </div>
+    </div>
+  </section>
+  <div id="stickyPlaceholder" aria-hidden="true"></div>
+
+  <!-- Offer Carousel -->
+  <div id="offerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner text-center offer-carousel">
+      <div class="carousel-item p-2">
+        <h5 class="m-0">🚚 नका बसू शांत घरी, ऑर्डर करा फ्री डिलिव्हरी फ्रॉम खाऊगिरी. फक्त 100 रु च्या ऑर्डर वर</h5>
+      </div>
+      <div class="carousel-item active p-2">
+        <h5 class="m-0">🍔 फ्रोझन मका, वाटाणा आणि फ्रेंच फ्राईज ऊपलब्ध</h5>
+      </div>
+      <div class="carousel-item p-2">
+        <h5 class="m-0">🚚🚚 !! सोमवार बंद !! 🚚🚚</h5>
+      </div>
+    </div>
+  </div>
 
   <header class="hero-section">
     <div class="hero-overlay"></div>
@@ -42,8 +78,9 @@
     </div>
   </header>
 
-  <section class="container py-0">
-    <div class="sticky-bar" id="stickyBar">
+  <section class="container py-3">
+    <div id="menuContainer"></div>
+  </section>
       <div class="search-row mb-3">
         <label id="searchLabel" class="visually-hidden">Search menu</label>
         <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search menu items, categories, prices..." />

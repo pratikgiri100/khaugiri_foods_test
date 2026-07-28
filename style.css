@@ -1,9 +1,14 @@
+:root {
+  --navbar-height: 140px;
+  --carousel-height: 0px;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #1f2937;
   background: linear-gradient(180deg, #f7fafc 0%, #eef2f6 100%);
   min-height: 100vh;
-  padding-top: 120px;
+  padding-top: var(--navbar-height, 140px);
 }
 .site-body {
   background-image: url('background.jpg');
@@ -18,28 +23,35 @@ body {
 .custom-navbar {
   background: rgba(18, 87, 53, 0.96);
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
+  min-height: 72px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 .logo-img {
-  width: 88px;
-  height: 68px;
-  border-radius: 16px;
+  width: 90px;
+  height: 60px;
+  border-radius: 12px;
   border: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 .restaurant-name {
-  font-weight: 800;
-  font-size: 1.15rem;
+  font-weight: 700;
+  font-size: 1.1rem;
   color: #fff;
   letter-spacing: 0.8px;
+  line-height: 1.2;
 }
 .restaurant-tagline {
   font-weight: 500;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   color: #d8f5e0;
+  line-height: 1.2;
 }
 .restaurant-contact {
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 0.8rem;
   color: #f5fdf8;
+  line-height: 1.2;
 }
 .hero-section {
   position: relative;
@@ -53,9 +65,6 @@ body {
 }
 
 /* When the sticky bar is fixed, push the hero down so it isn't overlapped */
-body.has-fixed-sticky .hero-section {
-  padding-top: calc(4rem + var(--sticky-bar-height, 0px));
-}
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -74,9 +83,19 @@ body.has-fixed-sticky .hero-section {
 .hero-section .hero-logo {
   transition: transform 0.35s ease;
 }
+body.scrolled #offerCarousel {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
 body.scrolled .hero-section {
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  min-height: 0;
+  overflow: hidden;
 }
 body.scrolled .hero-section .hero-logo {
   transform: scale(0.88);
@@ -228,6 +247,43 @@ body.search-active .hero-section .hero-overlay {
   border-color: transparent;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
 }
+
+/* Stylish Carousel Look */
+#offerCarousel {
+  position: relative;
+  z-index: 1040;
+  margin-top: 0;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: #ffea8a;
+  transition: all 0.25s ease;
+}
+
+.offer-carousel {
+  background: linear-gradient(90deg, #ffcc00, #ff9900);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  color: #000;
+  font-weight: bold;
+  padding: 0.75rem 0;
+  min-height: 56px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.carousel-item {
+  min-height: 58px;
+  position: relative;
+}
+
+.offer-carousel h5 {
+  font-size: 18px;
+  animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 5px #fff; }
+  to   { text-shadow: 0 0 12px #5100ff; }
+}
+
 .search-row {
   max-width: 720px;
   margin: 0 auto;
@@ -237,23 +293,27 @@ body.search-active .hero-section .hero-overlay {
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
-/* Combined sticky container for search + categories */
+/* Keep the search and category bar fixed below the navbar. */
 .sticky-bar {
   position: fixed;
   left: 0;
   right: 0;
-  top: var(--sticky-top, 88px);
+  top: var(--navbar-height, 140px);
   z-index: 1050;
-  background: rgba(247, 250, 252, 0.0);
+  background: rgba(247, 250, 252, 0.98);
   padding-top: 6px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
 }
 
-/* When search is active, the navbar collapses — bring sticky-bar closer to top */
-/* When search is active we set --sticky-top from JS; provide a fallback */
 body.search-active .sticky-bar {
-  background: rgba(247, 250, 252, 0.95);
+  background: rgba(247, 250, 252, 0.98);
   backdrop-filter: blur(8px);
-  box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+}
+
+@media (max-width: 576px) {
+  .sticky-bar {
+    top: var(--navbar-height, 140px);
+  }
 }
 .menu-section {
   margin-bottom: 3rem;
@@ -435,7 +495,7 @@ body.scrolled .categories-wrapper::after {
 }
 @media (max-width: 992px) {
   body {
-    padding-top: 100px;
+    padding-top: var(--navbar-height, 100px);
   }
   .navbar {
     padding: 1rem 1rem;
@@ -457,9 +517,6 @@ body.scrolled .categories-wrapper::after {
   .hero-section {
     padding-top: 3rem;
     padding-bottom: 1.5rem;
-  }
-  body.has-fixed-sticky .hero-section {
-    padding-top: calc(3rem + var(--sticky-bar-height, 0px));
   }
   .hero-section .display-5 {
     font-size: 2.2rem;
@@ -511,12 +568,12 @@ body.scrolled .categories-wrapper::after {
   }
 }
 @media (max-width: 576px) {
+  body {
+    padding-top: var(--navbar-height, 100px);
+  }
   .hero-section {
     padding-top: 2.5rem;
     padding-bottom: 1.2rem;
-  }
-  body.has-fixed-sticky .hero-section {
-    padding-top: calc(2.5rem + var(--sticky-bar-height, 0px));
   }
   .hero-section .display-5 {
     font-size: 1.8rem;
@@ -596,9 +653,4 @@ body.scrolled .categories-wrapper::after {
 .back-to-top:hover {
   background: #0f6f3d;
   transform: translateY(-2px);
-}
-.carousel,
-.carousel-inner,
-.carousel-item {
-  display: none;
 }
