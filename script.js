@@ -324,6 +324,20 @@ function buildItemId(categorySlug, index) {
   return `${categorySlug}-${index}`;
 }
 
+function setActiveCategory(categorySlug, shouldScrollPill = true) {
+  const allPills = document.querySelectorAll('.category-pill');
+  allPills.forEach(pill => {
+    const isActive = pill.dataset.categorySlug === categorySlug;
+    pill.classList.toggle('active', isActive);
+    pill.setAttribute('aria-selected', String(isActive));
+  });
+
+  const activePill = Array.from(allPills).find(pill => pill.dataset.categorySlug === categorySlug);
+  if (activePill && shouldScrollPill) {
+    activePill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+}
+
 function renderCategoryNav(categoryList) {
   const nav = document.getElementById('categoryNav');
   if (!nav) return;
@@ -333,7 +347,9 @@ function renderCategoryNav(categoryList) {
     const button = document.createElement('button');
     button.className = 'category-pill';
     button.type = 'button';
+    button.dataset.categorySlug = category.slug;
     button.textContent = category.name.trim();
+    button.setAttribute('aria-selected', 'false');
     button.addEventListener('click', () => {
       const target = document.getElementById(category.slug);
       if (target) {
@@ -347,8 +363,7 @@ function renderCategoryNav(categoryList) {
         window.scrollTo({ top: targetTop, behavior: 'smooth' });
         document.body.classList.add('scrolled');
       }
-      document.querySelectorAll('.category-pill').forEach(pill => pill.classList.remove('active'));
-      button.classList.add('active');
+      setActiveCategory(category.slug);
     });
     nav.appendChild(button);
   });
@@ -356,7 +371,30 @@ function renderCategoryNav(categoryList) {
   const firstButton = nav.querySelector('.category-pill');
   if (firstButton) {
     firstButton.classList.add('active');
+    firstButton.setAttribute('aria-selected', 'true');
   }
+}
+
+function observeMenuSections() {
+  const sections = document.querySelectorAll('.menu-section');
+  if (!sections.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    const visibleEntries = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+    if (!visibleEntries.length) return;
+
+    const activeSection = visibleEntries[0].target;
+    setActiveCategory(activeSection.id, true);
+  }, {
+    root: null,
+    threshold: [0.12, 0.25, 0.5, 0.75],
+    rootMargin: '-18% 0px -42% 0px'
+  });
+
+  sections.forEach(section => observer.observe(section));
 }
 
 function renderMenu(filteredCategories = categories) {
@@ -401,6 +439,13 @@ function renderMenu(filteredCategories = categories) {
     `;
     container.appendChild(section);
   });
+
+  const firstSection = document.querySelector('.menu-section');
+  if (firstSection) {
+    setActiveCategory(firstSection.id, false);
+  }
+
+  observeMenuSections();
 }
 
 function increase(id) {
