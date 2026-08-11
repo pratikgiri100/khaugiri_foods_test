@@ -341,6 +341,17 @@ function setActiveCategory(categorySlug, shouldScrollPill = true) {
 function renderCategoryNav(categoryList) {
   const nav = document.getElementById('categoryNav');
   if (!nav) return;
+
+  // Force the navigation to be a true wrapping layout instead of a horizontally scrolling row.
+  nav.style.display = 'flex';
+  nav.style.flexWrap = 'wrap';
+  nav.style.justifyContent = 'center';
+  nav.style.alignItems = 'center';
+  nav.style.overflowX = 'visible';
+  nav.style.overflowY = 'visible';
+  nav.style.whiteSpace = 'normal';
+  nav.style.gap = '0.65rem';
+
   nav.innerHTML = '';
 
   categoryList.forEach(category => {
@@ -350,6 +361,9 @@ function renderCategoryNav(categoryList) {
     button.dataset.categorySlug = category.slug;
     button.textContent = category.name.trim();
     button.setAttribute('aria-selected', 'false');
+    button.style.flex = '0 1 auto';
+    button.style.width = 'auto';
+    button.style.minWidth = 'fit-content';
     button.addEventListener('click', () => {
       const target = document.getElementById(category.slug);
       if (target) {

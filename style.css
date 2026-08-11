@@ -571,60 +571,155 @@ body.scrolled .categories-wrapper::after {
   body {
     padding-top: var(--navbar-height, 100px);
   }
-  .hero-section {
-    padding-top: 2.5rem;
-    padding-bottom: 1.2rem;
+
+  .custom-navbar {
+    min-height: 52px;
+    padding: 0.16rem 0.5rem;
   }
+
+  .custom-navbar .d-flex.align-items-center {
+    min-width: 0;
+  }
+
+  .logo-img {
+    width: 46px;
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  .restaurant-name {
+    font-size: 0.82rem;
+    line-height: 1.05;
+  }
+
+  .restaurant-tagline {
+    font-size: 0.68rem;
+    line-height: 1.05;
+  }
+
+  .restaurant-contact {
+    font-size: 0.70rem;
+    line-height: 1.04;
+  }
+
+  .order-btn {
+    width: 100%;
+    padding: 0.62rem 1rem;
+    font-size: 0.72rem;
+  }
+
+  .hero-section {
+    padding-top: 2.2rem;
+    padding-bottom: 1.0rem;
+  }
+
   .hero-section .display-5 {
     font-size: 1.8rem;
   }
+
   .hero-section .lead {
     font-size: 0.96rem;
   }
+
   .hero-logo {
     max-width: 150px;
   }
+
   .hero-content {
     text-align: center;
   }
+
+  .sticky-bar {
+    position: fixed;
+    top: var(--navbar-height, 140px);
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    background: rgba(247, 250, 252, 0.98);
+    padding-top: 1px;
+    padding-bottom: 1px;
+    min-height: auto;
+    max-height: 26vh;
+    overflow: hidden;
+  }
+
+  .sticky-bar .search-row {
+    display: none;
+  }
+
+  .categories-wrapper {
+    top: 0;
+    margin-top: 0;
+    padding: 0.15rem 0.30rem 0.25rem;
+    overflow: hidden;
+    box-shadow: none;
+    border-bottom: none;
+    max-height: 24vh;
+  }
+
   .category-nav {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.26rem;
+    overflow: hidden;
+    white-space: normal;
+    padding: 0.08rem;
+    -webkit-overflow-scrolling: auto;
   }
+
   .category-pill {
-    font-size: 0.85rem;
-    padding: 0.75rem 1rem;
+    font-size: 0.70rem;
+    padding: 0.40rem 0.62rem;
     min-width: auto;
+    max-width: none;
+    line-height: 1.05;
+    flex: 0 1 auto;
   }
+
   .search-row {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
+
   .search-row input {
     font-size: 0.95rem;
     padding: 1rem 1.1rem;
   }
+
   .food-card img {
     height: 150px;
   }
+
   .quantity-controls {
     gap: 0.5rem;
   }
+
   .quantity-controls button {
     width: 40px;
     height: 40px;
   }
+
   .quantity-count {
     font-size: 0.95rem;
   }
-  .order-btn {
-    width: 100%;
-    padding: 0.9rem 1rem;
-  }
+
   .categories-wrapper::before,
   .categories-wrapper::after {
     width: 2rem;
+  }
+
+  #stickyPlaceholder {
+    min-height: 0;
+  }
+
+  #menuContainer {
+    padding-top: 0.25rem;
+  }
+
+  .menu-section {
+    margin-bottom: 1.4rem;
+    scroll-margin-top: 120px;
   }
 }
 .back-to-top {
