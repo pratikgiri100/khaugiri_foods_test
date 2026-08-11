@@ -582,51 +582,88 @@ body.scrolled .categories-wrapper::after {
   }
 
   .logo-img {
-    width: 46px;
-    height: 44px;
+    width: 54px;
+    height: 48px;
     border-radius: 10px;
   }
 
   .restaurant-name {
-    font-size: 0.82rem;
-    line-height: 1.05;
+    font-size: 1.02rem;
+    line-height: 1.08;
   }
 
   .restaurant-tagline {
-    font-size: 0.68rem;
-    line-height: 1.05;
+    font-size: 0.80rem;
+    line-height: 1.08;
   }
 
   .restaurant-contact {
-    font-size: 0.70rem;
-    line-height: 1.04;
+    font-size: 0.82rem;
+    line-height: 1.08;
   }
 
   .order-btn {
     width: 100%;
     padding: 0.62rem 1rem;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
+  }
+
+  #offerCarousel {
+    min-height: 30px;
+    height: 30px;
+    margin-top: 0;
+  }
+
+  .offer-carousel {
+    min-height: 30px;
+    height: 30px;
+    padding: 0.15rem 0;
+  }
+
+  .carousel-item {
+    min-height: 30px;
+    height: 30px;
+  }
+
+  .offer-carousel h5 {
+    font-size: 0.70rem;
+    line-height: 1.06;
   }
 
   .hero-section {
-    padding-top: 2.2rem;
-    padding-bottom: 1.0rem;
+    padding-top: 0.30rem;
+    padding-bottom: 0.30rem;
+    min-height: 105px;
+  }
+
+  .hero-content {
+    padding-top: 0.10rem;
+    padding-bottom: 0.10rem;
+    text-align: center;
   }
 
   .hero-section .display-5 {
-    font-size: 1.8rem;
+    font-size: 0.98rem;
+    line-height: 1.04;
+    margin-bottom: 0.20rem;
   }
 
   .hero-section .lead {
-    font-size: 0.96rem;
+    display: none;
+  }
+
+  .hero-section .eyebrow {
+    display: none;
+  }
+
+  .hero-section .btn {
+    font-size: 0.67rem;
+    padding: 0.34rem 0.60rem;
   }
 
   .hero-logo {
     max-width: 150px;
-  }
-
-  .hero-content {
-    text-align: center;
+    display: none;
   }
 
   .sticky-bar {
@@ -639,8 +676,8 @@ body.scrolled .categories-wrapper::after {
     padding-top: 1px;
     padding-bottom: 1px;
     min-height: auto;
-    max-height: 26vh;
-    overflow: hidden;
+    height: auto;
+    overflow: visible;
   }
 
   .sticky-bar .search-row {
@@ -650,11 +687,12 @@ body.scrolled .categories-wrapper::after {
   .categories-wrapper {
     top: 0;
     margin-top: 0;
-    padding: 0.15rem 0.30rem 0.25rem;
-    overflow: hidden;
+    padding: 0.05rem 0.18rem 0.10rem;
+    overflow: visible;
     box-shadow: none;
     border-bottom: none;
-    max-height: 24vh;
+    max-height: none;
+    height: auto;
   }
 
   .category-nav {
@@ -662,19 +700,19 @@ body.scrolled .categories-wrapper::after {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.26rem;
-    overflow: hidden;
+    gap: 0.16rem;
+    overflow: visible;
     white-space: normal;
-    padding: 0.08rem;
+    padding: 0.02rem;
     -webkit-overflow-scrolling: auto;
   }
 
   .category-pill {
     font-size: 0.70rem;
-    padding: 0.40rem 0.62rem;
+    padding: 0.26rem 0.56rem;
     min-width: auto;
     max-width: none;
-    line-height: 1.05;
+    line-height: 1.00;
     flex: 0 1 auto;
   }
 
