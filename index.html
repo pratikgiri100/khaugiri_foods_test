@@ -1,159 +1,139 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Khaugiri Foods</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
   <link rel="stylesheet" href="style.css" />
+
 </head>
-<body class="site-body">
-  <nav class="navbar navbar-expand-lg px-3 py-2 fixed-top custom-navbar">
-    <div class="d-flex align-items-center">
-      <!-- Logo -->
-      <img src="KGF_Logo.png" alt="Khaugiri Logo" class="logo-img me-3">
 
-      <!-- Text Section -->
-      <div class="d-flex flex-column">
-        <span class="restaurant-name">KhauGiri Foods (KGF)</span>
-        <span class="restaurant-tagline">Pure Veg &amp; Fast Food Restaurant</span>
-        <span class="restaurant-contact">
-          📞 9403201043, 7028493881
-        </span>
-      </div>
-    </div>
+<body style="background-image: url('background.jpg'); background-size: cover; background-attachment: fixed;">
 
-    <!-- Order Button -->
-    <button class="btn order-btn ms-auto" id="viewCartBtn">
-      <span style="filter: grayscale(100%) brightness(0);">🍴</span> View &amp; Place Order
-    </button>
-  </nav>
 
-  <section class="container py-0">
-    <div class="sticky-bar" id="stickyBar">
-      <div class="search-row mb-3">
-        <label id="searchLabel" class="visually-hidden">Search menu items, categories, prices...</label>
-        <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search menu items, categories, prices..." />
-      </div>
 
-      <div class="categories-wrapper py-2">
-        <div class="d-flex gap-2 category-nav" id="categoryNav" role="tablist" aria-label="Menu categories"></div>
-      </div>
-    </div>
-  </section>
-  <div id="stickyPlaceholder" aria-hidden="true"></div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg px-3 py-2 fixed-top custom-navbar">
+  <div class="d-flex align-items-center">
+    <!-- Logo -->
+    <img src="KGF_Logo.png" alt="Khaugiri Logo" class="logo-img me-3" />
 
-  <!-- Offer Carousel -->
-  <div id="offerCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner text-center offer-carousel">
-      <div class="carousel-item p-2">
-        <h5 class="m-0">🚚 नका बसू शांत घरी, ऑर्डर करा फ्री डिलिव्हरी फ्रॉम खाऊगिरी. फक्त 100 रु च्या ऑर्डर वर</h5>
-      </div>
-      <div class="carousel-item active p-2">
-        <h5 class="m-0">🍔 फ्रोझन मका, वाटाणा आणि फ्रेंच फ्राईज ऊपलब्ध</h5>
-      </div>
-      <div class="carousel-item p-2">
-        <h5 class="m-0">🚚🚚 !! सोमवार बंद !! 🚚🚚</h5>
-      </div>
+    <!-- Text Section -->
+    <div class="d-flex flex-column">
+      <span class="restaurant-name">KhauGiri Foods (KGF)</span>
+      <span class="restaurant-tagline">Pure Veg & Fast Food Restaurant</span>
+      <span class="restaurant-contact">
+        📞 9403201043, 7028493881
+      </span>
     </div>
   </div>
 
-  <header class="hero-section">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content py-5">
-      <div class="row align-items-center">
-        <div class="col-lg-7 text-white">
-          <p class="eyebrow">खाऊगिरी फूड्समध्ये आपले हार्दिक स्वागत!</p>
-          <h1 class="display-5 fw-bold mb-3">ताजे, स्वादिष्ट आणि शुद्ध शाकाहारी पदार्थ आता वर दिलेल्या कॅटेगरी नुसार सहज ऑर्डर करा.</h1>
-          <p class="lead mb-4">पिझ्झा, रोल्स, सँडविच, नूडल्स, चाट, डेझर्ट्स आणि 150+ चविष्ट पदार्थांच्या मेनूमधून आपल्या आवडीचे पदार्थ निवडा.  ₹100 किंवा त्या पेक्षा जास्त ऑर्डरवर मोफत होम डिलिव्हरी!</p>
-          <div class="d-flex flex-wrap gap-2">
-            <a href="#menuContainer" class="btn btn-primary btn-lg">Explore Menu</a>
-            <button class="btn btn-outline-light btn-lg" id="quickOrderBtn">Order via WhatsApp</button>
-          </div>
-        </div>
-        <div class="col-lg-5 d-none d-lg-block text-center">
-          <img src="KGF_Logo.png" alt="Khaugiri Foods" class="hero-logo" />
-        </div>
-      </div>
+  <!-- Order Button -->
+  <button class="btn order-btn ms-auto" id="viewCartBtn">
+    <span style="filter: grayscale(100%) brightness(0);">🍴</span> View & Place Order
+  </button>
+</nav>
+
+<!-- Mini header shown when collapsed: only order button -->
+<div id="miniHeader" class="mini-header d-none">
+  <button class="btn order-btn" id="miniViewCartBtn">🍴 View & Place Order</button>
+</div>
+
+
+
+<!-- Offer Carousel -->
+<div id="offerCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner text-center offer-carousel">
+    <div class="carousel-item p-2">
+      <h5 class="m-0">🚚 नका बसू शांत घरी, ऑर्डर करा फ्री डिलिव्हरी फ्रॉम खाऊगिरी. फक्त 100 रु च्या ऑर्डर वर </h5>
     </div>
-  </header>
-
-  <section class="container py-3">
-    <div id="menuContainer"></div>
-  </section>
-      <div class="search-row mb-3">
-        <label id="searchLabel" class="visually-hidden">Search menu</label>
-        <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search menu items, categories, prices..." />
-      </div>
-
-      <div class="categories-wrapper py-2">
-        <div class="d-flex gap-2 category-nav" id="categoryNav" role="tablist" aria-label="Menu categories"></div>
-      </div>
+    <div class="carousel-item active p-2">
+      <h5 class="m-0"> 🍔 फ्रोझन मका, वाटाणा आणि फ्रेंच फ्राईज ऊपलब्ध </h5>
     </div>
-  </section>
-  <div id="stickyPlaceholder" aria-hidden="true"></div>
+    <div class="carousel-item p-2">
+      <h5 class="m-0">🚚🚚 !! सोमवार बंद !! 🚚🚚 </h5>
+    </div>    
+  </div>
+</div>
 
-  <section class="container py-3">
-    <div id="menuContainer"></div>
-  </section>
+<!-- Category chips (dynamically filled) -->
+<div class="container my-3" id="categoryChips"></div>
+<!-- Menu -->
 
-  <div class="container py-4">
-    <div class="row gx-4 gy-3">
-      <div class="col-md-4 card highlight-card">
-        <div class="card-body">
-          <h5>Fast Delivery</h5>
-          <p>Order now and get your favourite food delivered hot and fresh.</p>
-        </div>
+<div class="container my-4" id="menuContainer"></div>
+
+
+
+<!-- Cart Modal -->
+
+<div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-scrollable">
+
+    <div class="modal-content p-3 rounded shadow">
+
+      <div class="modal-header">
+
+        <h5 class="modal-title">Review & Place Order</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
       </div>
-      <div class="col-md-4 card highlight-card">
-        <div class="card-body">
-          <h5>Pure Veg Menu</h5>
-          <p>100% vegetarian meals with carefully selected ingredients.</p>
+
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+
+        <div id="cartItems"></div>
+
+        <p id="totalAmount" class="fw-bold fs-5">Total: ₹0</p>
+
+        <p class="text-center"><strong>Scan QR to Pay</strong></p>
+
+        <div class="qr-placeholder text-center py-4">
+
+          <img src="upi.jpeg" alt="UPI QR Code" style="max-width: 200px; height: auto;" />
+
         </div>
+
+        <p class="text-center mt-3"><strong>UPI Number:</strong> 9403201043</p>
+
+        <p class="text-muted text-center">ऑर्डर प्लेस केल्यानंतर कृपया ऑनलाईन पेमेन्ट रिसिप्ट शेअर करा. </p>
+
+        <p class="text-muted text-center">किंवा कॅश ऑन डेलीव्हरी असल्यास सुट्टे पैसे द्या. धन्यवाद </p>
+
       </div>
-      <div class="col-md-4 card highlight-card">
-        <div class="card-body">
-          <h5>Easy WhatsApp Ordering</h5>
-          <p>Review your cart and place orders directly through WhatsApp.</p>
-        </div>
+
+      <div class="modal-footer">
+
+        <a href="#" id="whatsappBtn" target="_blank" class="btn btn-success w-100">Send Order via WhatsApp</a>
+
       </div>
+
     </div>
+
   </div>
 
-  <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-      <div class="modal-content rounded-4 shadow-sm">
-        <div class="modal-header border-0">
-          <div>
-            <h5 class="modal-title">Review & Place Order</h5>
-            <p class="text-muted mb-0">Confirm your items before sending the order.</p>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div id="cartItems" class="mb-3"></div>
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <span class="fw-semibold">Total</span>
-            <span id="totalAmount" class="fs-5 fw-bold">₹0</span>
-          </div>
-          <p class="mb-2 text-center"><strong>Scan QR to Pay</strong></p>
-          <div class="qr-placeholder text-center py-4 mb-3">
-            <img src="upi.jpeg" alt="UPI QR Code" class="img-fluid" style="max-width: 220px;" />
-          </div>
-          <p class="text-center mb-1"><strong>UPI Number:</strong> 9403201043</p>
-          <p class="text-muted text-center mb-0">ऑर्डर प्लेस केल्यानंतर कृपया ऑनलाईन पेमेन्ट रिसिप्ट शेअर करा.</p>
-          <p class="text-muted text-center">किंवा कॅश ऑन डिलीव्हरी असल्यास सुट्टे पैसे द्या. धन्यवाद</p>
-        </div>
-        <div class="modal-footer border-0 pt-0">
-          <a href="#" id="whatsappBtn" target="_blank" class="btn btn-success w-100">Send Order via WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>
 
-  <button id="backToTopBtn" class="back-to-top" type="button" aria-label="Back to top">↑</button>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
+
+
+<!-- Back to top button -->
+<button id="backToTop" class="back-to-top d-none" aria-label="Back to top">▲</button>
+
+<!-- Scripts -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
+
 </body>
+
 </html>
 
