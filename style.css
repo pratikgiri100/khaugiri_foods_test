@@ -130,6 +130,11 @@ body {
     display: flex !important;
   }
 
+  /* Keep the fixed order button behind the modal while reviewing an order */
+  body.modal-open #miniHeader {
+    display: none !important;
+  }
+
   body.collapsed #categoryChips {
     position: fixed;
     top: 56px; /* below mini header */
