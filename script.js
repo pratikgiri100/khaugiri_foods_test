@@ -528,6 +528,7 @@ window.addEventListener('resize', updateHeaderOffset);
   const chips = document.getElementById('categoryChips');
   const menuContainer = document.getElementById('menuContainer');
   const miniBtn = document.getElementById('miniViewCartBtn');
+  let collapsePoint = carousel ? carousel.offsetTop + carousel.offsetHeight - 50 : 150;
 
   if (miniBtn) miniBtn.addEventListener('click', () => {
     const modal = new bootstrap.Modal(document.getElementById('cartModal'));
@@ -535,8 +536,7 @@ window.addEventListener('resize', updateHeaderOffset);
   });
 
   function updateCollapse() {
-    const threshold = carousel ? (carousel.getBoundingClientRect().bottom + window.pageYOffset) : 200;
-    if (window.pageYOffset > threshold - 50) {
+    if (window.pageYOffset > collapsePoint) {
       if (!document.body.classList.contains('collapsed')) {
         document.body.classList.add('collapsed');
         // adjust menu container padding to chips height + mini header
@@ -557,6 +557,11 @@ window.addEventListener('resize', updateHeaderOffset);
   }
 
   window.addEventListener('scroll', updateCollapse);
+  window.addEventListener('resize', () => {
+    if (!document.body.classList.contains('collapsed') && carousel) {
+      collapsePoint = carousel.offsetTop + carousel.offsetHeight - 50;
+    }
+  });
   // run once
   setTimeout(updateCollapse, 300);
 })();
