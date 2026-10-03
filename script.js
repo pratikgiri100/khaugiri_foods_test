@@ -353,8 +353,8 @@ const categories = [
       { name: "फुलका ", price: 12, image: "menu card image/fhulka.jpeg"},
       { name: "पुरी", price: 25, image: "menu card image/puri.jpeg"},
       { name: "श्रीखंड ", price: 40, image: "menu card image/shikhand.jpeg"},
-      { name: "मसाला पापड", price: 30, image: "menu card image/masala papad.jpeg"},
-      { name: "रोस्टेड पापड ", price: 20, image: "menu card image/roasted papad.jpeg"}
+      { name: "मसाला पापड", price: 40, image: "menu card image/masala papad.jpeg"},
+      { name: "रोस्टेड पापड ", price: 30, image: "menu card image/roasted papad.jpeg"}
 
     ]
   }
