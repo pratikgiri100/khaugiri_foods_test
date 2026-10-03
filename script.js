@@ -516,9 +516,11 @@ function updateHeaderOffset() {
   const navbarHeight = navbar ? navbar.offsetHeight : 0;
   const chipsHeight = chips ? chips.offsetHeight : 0;
   const offset = navbarHeight + chipsHeight + 20; // safety buffer
+  document.documentElement.style.setProperty('--navbar-height', navbarHeight + 'px');
   document.documentElement.style.setProperty('--header-offset', offset + 'px');
 }
 
+updateHeaderOffset();
 window.addEventListener('resize', updateHeaderOffset);
 
 // Collapse navbar and carousel when scrolling past carousel; show mini header and fix chips
@@ -607,26 +609,36 @@ window.addEventListener('resize', updateHeaderOffset);
 function scrollToSection(targetId) {
   const el = document.getElementById(targetId);
   if (!el) return;
-  // Compute exact scroll position so heading appears below any fixed elements
+  // Account for the fixed mobile controls and menu spacing added on collapse.
   const navbar = document.querySelector('.custom-navbar');
+  const miniHeader = document.getElementById('miniHeader');
   const chips = document.getElementById('categoryChips');
+  const menuContainer = document.getElementById('menuContainer');
+  const collapsed = document.body.classList.contains('collapsed');
   const navbarVisible = navbar && getComputedStyle(navbar).display !== 'none';
-  const navbarHeight = navbarVisible ? navbar.offsetHeight : 0;
-
-  let chipsHeight = 0;
-  if (chips) {
-    const cs = getComputedStyle(chips);
-    // chips are effectively fixed when body.collapsed or CSS position fixed
-    if (document.body.classList.contains('collapsed') || cs.position === 'fixed') {
-      chipsHeight = chips.offsetHeight;
-    }
-  }
-
-  const extraGap = 8; // small safety gap
+  const destinationAfterMenu = menuContainer &&
+    (menuContainer.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING);
+  const willCollapse = !collapsed && destinationAfterMenu;
+  const navbarHeight = navbarVisible && !willCollapse ? navbar.offsetHeight : 0;
+  const miniHeaderHeight = (collapsed || willCollapse) && miniHeader
+    ? miniHeader.offsetHeight || 56
+    : 0;
+  const chipsHeight = (collapsed || willCollapse) && chips ? chips.offsetHeight : 0;
+  const extraGap = 20; // small safety gap
   const rect = el.getBoundingClientRect();
   const absoluteTop = rect.top + window.pageYOffset;
-  const offset = navbarHeight + chipsHeight + extraGap;
+  const offset = navbarHeight + miniHeaderHeight + chipsHeight + extraGap;
   const targetY = Math.max(0, absoluteTop - offset);
   window.scrollTo({ top: targetY, behavior: 'smooth' });
 }
+
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const targetId = link.getAttribute('href').slice(1);
+    if (!document.getElementById(targetId)) return;
+    event.preventDefault();
+    history.pushState(null, '', `#${targetId}`);
+    scrollToSection(targetId);
+  });
+});
 

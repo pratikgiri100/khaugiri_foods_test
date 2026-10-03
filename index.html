@@ -40,6 +40,13 @@
   <button class="btn order-btn ms-auto" id="viewCartBtn">
     <span style="filter: grayscale(100%) brightness(0);">🍴</span> View & Place Order
   </button>
+
+  <div class="nav-links">
+    <a href="#online-order">Online Order</a>
+    <a href="#birthday-packages">Birthday Packages</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
 <!-- Mini header shown when collapsed: only order button -->
@@ -47,28 +54,104 @@
   <button class="btn order-btn" id="miniViewCartBtn">🍴 View & Place Order</button>
 </div>
 
-
-
-<!-- Offer Carousel -->
-<div id="offerCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner text-center offer-carousel">
-    <div class="carousel-item p-2">
-      <h5 class="m-0">🚚 नका बसू शांत घरी, ऑर्डर करा फ्री डिलिव्हरी फ्रॉम खाऊगिरी. फक्त 100 रु च्या ऑर्डर वर </h5>
+<main>
+  <!-- Offer Carousel -->
+  <div id="offerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner text-center offer-carousel">
+      <div class="carousel-item p-2">
+        <h5 class="m-0">🚚 नका बसू शांत घरी, ऑर्डर करा फ्री डिलिव्हरी फ्रॉम खाऊगिरी. फक्त 100 रु च्या ऑर्डर वर </h5>
+      </div>
+      <div class="carousel-item active p-2">
+        <h5 class="m-0"> 🍔 फ्रोझन मका, वाटाणा आणि फ्रेंच फ्राईज ऊपलब्ध </h5>
+      </div>
+      <div class="carousel-item p-2">
+        <h5 class="m-0">🚚🚚 !! सोमवार बंद !! 🚚🚚 </h5>
+      </div>
     </div>
-    <div class="carousel-item active p-2">
-      <h5 class="m-0"> 🍔 फ्रोझन मका, वाटाणा आणि फ्रेंच फ्राईज ऊपलब्ध </h5>
-    </div>
-    <div class="carousel-item p-2">
-      <h5 class="m-0">🚚🚚 !! सोमवार बंद !! 🚚🚚 </h5>
-    </div>    
   </div>
-</div>
 
-<!-- Category chips (dynamically filled) -->
-<div class="container my-3" id="categoryChips"></div>
-<!-- Menu -->
+  <section id="online-order">
+    <!-- Category chips (dynamically filled) -->
+    <div class="container my-3" id="categoryChips"></div>
+    <!-- Menu -->
+    <div class="container my-4" id="menuContainer"></div>
+  </section>
 
-<div class="container my-4" id="menuContainer"></div>
+  <section id="birthday-packages" class="section-block">
+    <div class="container">
+      <h4 class="section-title">BirthDay Packages</h4>
+      <div class="birthday-package-content">
+        <div class="birthday-prices" aria-label="वाढदिवस पॅकेजचे दर">
+          <div class="birthday-price">
+            <h5>40 व्यक्तींसाठी</h5>
+            <p>₹5000</p>
+          </div>
+          <div class="birthday-price">
+            <h5>30 व्यक्तींसाठी</h5>
+            <p>₹4000</p>
+          </div>
+          <div class="birthday-price">
+            <h5>20 व्यक्तींसाठी</h5>
+            <p>₹3000</p>
+          </div>
+        </div>
+        <h5 class="birthday-inclusions-title">पॅकेजमध्ये समाविष्ट</h5>
+        <ul class="birthday-inclusions">
+          <li><strong>Menu Items:</strong> पावभाजी, मंचुरियन आणि आईस्क्रीम</li>
+          <li><strong>केक:</strong> अर्धा किलो</li>
+          <li>सिम्पल डेकोररशन</li>
+          <li>म्युसिक सिस्टिम </li>
+          <li>स्वतंत्र जागेची सोय</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section-block">
+    <div class="container">
+      <h4 class="section-title">About Us</h4>
+      <div class="about-box">
+        <p>
+          खाऊगिरी फूड्स हे शुद्ध शाकाहारी फास्ट-फूड रेस्टॉरंट आहे. येथे स्वादिष्ट स्नॅक्स, शेक्स,
+          पदार्थ आणि लोकप्रिय स्ट्रीट फूड मिळते.
+        </p>
+        <p>
+          दर्जेदार चव, जलद सेवा आणि कुटुंब, विद्यार्थी व खवय्यांसाठी रुचकर पर्याय हे आमचे वैशिष्ट्य.
+          झटपट नाश्त्यापासून पोटभर जेवणापर्यंत, प्रत्येकासाठी काहीतरी खास.
+        </p>
+
+        <div class="video-section mt-4">
+          <h5 class="section-title mb-3">खाऊगिरी फूड्सची झलक</h5>
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/BD8PTabC59k?si=n44ReivmaeJt7YZd"
+              title="खाऊगिरी फूड्सची व्हिडिओ झलक"
+              referrerpolicy="origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a class="video-open-link" href="https://youtube.com/shorts/BD8PTabC59k?si=n44ReivmaeJt7YZd" target="_blank" rel="noopener noreferrer">
+            YouTube वर व्हिडिओ उघडा
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section-block">
+    <div class="container">
+      <h4 class="section-title">Contact Us</h4>
+      <div class="contact-box">
+        <p><strong>पत्ता:</strong> राजर्षी शाहू कॉलेज जवळ, विरूळ रोड, चांदुर रेल्वे.</p>
+        <p><strong>फोन:</strong> <a href="tel:9403201043">9403201043</a>, <a href="tel:7028493881">7028493881</a></p>
+        <p><strong>फ्री होम डिलिव्हरी</strong></p>
+        <p><strong>साप्ताहिक सुट्टी:</strong> सोमवार बंद </p>
+        <p class="mb-0">वाढदिवस पॅकेजची चौकशी व आरक्षणासाठी फोन करा.</p>
+      </div>
+    </div>
+  </section>
+</main>
 
 
 

@@ -3,12 +3,48 @@ body {
   color: #333;
   background-color: rgba(255, 255, 255, 0.85);
   padding-top: 120px;
- 
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  flex-wrap: wrap;
+}
+
 .navbar img {
   object-fit: cover;
   object-position: center;
 }
+
+.nav-links {
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  margin-top: 0;
+  margin-left: auto;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
 .restaurant-name {
   font-weight: 700; /* Bold */
   font-size: 1.25rem;
@@ -74,6 +110,9 @@ body {
   align-items: center;
 }
 @media (max-width: 600px) {
+  #offerCarousel {
+    margin-top: max(12px, calc(var(--navbar-height, 120px) - 120px + 12px));
+  }
   .food-card {
     min-width: 130px;
   }
@@ -224,6 +263,102 @@ body {
     padding: 0.5rem;   /* optional padding */
   }
 
+  .section-title {
+    font-weight: 700;
+    color: #0f3d2e;
+    margin-bottom: 16px;
+  }
+
+  .video-section,
+  .section-block {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    border: 3px solid rgba(0, 110, 67, 0.2);
+  }
+
+  .video-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .about-box,
+  .contact-box {
+    background: rgba(255,255,255,0.9);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    line-height: 1.8;
+    font-size: 1rem;
+  }
+
+  .birthday-package-content {
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .birthday-prices {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .birthday-price {
+    padding: 16px;
+    border-left: 4px solid #00a859;
+    border-radius: 6px;
+    background: #eef8f0;
+  }
+
+  .birthday-price h5 {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .birthday-price p {
+    margin: 0;
+    color: #0f6a3a;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .birthday-inclusions-title {
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  .birthday-inclusions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 24px;
+    margin: 0;
+    padding-left: 20px;
+    line-height: 1.6;
+  }
+
+  .contact-box a {
+    color: #0f3d2e;
+    font-weight: 600;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
   /* Category chips styling: compact, scrollable, limited height (~25% viewport)
      Keeps the chips visible but prevents them from pushing content too far down. */
   #categoryChips {
@@ -250,6 +385,9 @@ body {
   /* On small screens make chips slightly smaller and reduce card spacing */
   @media (max-width: 600px) {
     #categoryChips { max-height: 22vh; }
+    .birthday-package-content { padding: 16px; }
+    .birthday-prices,
+    .birthday-inclusions { grid-template-columns: 1fr; }
     .chip {
       padding: 3px 6px;
       font-size: 12px;
